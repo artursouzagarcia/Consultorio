@@ -1,8 +1,8 @@
 ﻿namespace Consultorio.Services
 {
-    public class EmailService
+    public class EmailService : IEmailService
     {
-        public void EnviarEmail()
+        public void EnviarEmail(string email)
         {
 
         }

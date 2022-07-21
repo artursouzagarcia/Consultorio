@@ -1,7 +1,9 @@
 using Consultorio.Models.Entities;
+using Consultorio.Services;
 using System.Collections.Generic;
 
 using Microsoft.AspNetCore.Mvc;
+using System;
 
 namespace Consultorio.Controllers
 {
@@ -9,10 +11,13 @@ namespace Consultorio.Controllers
     [Route("api/[controller]")]
     public class AgendamentoController : ControllerBase
     {
+        private readonly IEmailService _emailService;
         List<Agendamento> agendamentos = new List<Agendamento>();
 
-        public AgendamentoController()
+        public AgendamentoController(IEmailService emailService)
         {
+            this._emailService = emailService;
+
             agendamentos.Add(new Agendamento
             {
                 Id = 1,
@@ -25,13 +30,12 @@ namespace Consultorio.Controllers
                 NomePaciente = "Lucas",
                 Horario = new System.DateTime()
             });
-
             agendamentos.Add(new Agendamento
             {
                 Id = 3,
                 NomePaciente = "Rafael",
                 Horario = new System.DateTime()
-            });
+            });           
         }
 
         [HttpGet()]
@@ -54,8 +58,22 @@ namespace Consultorio.Controllers
         [HttpPost]
         public IActionResult Post()
         {
-            var pacienteAgendado = true;
+            try
+            {
+                bool pacienteAgendado = true;
 
+
+                if (pacienteAgendado)
+                {
+                    _emailService.EnviarEmail("artur@medx.med.br");
+                }
+
+                return Ok();
+
+            }catch(Exception e)
+            {
+                return BadRequest(e.Message);
+            }
         }
 
     }
