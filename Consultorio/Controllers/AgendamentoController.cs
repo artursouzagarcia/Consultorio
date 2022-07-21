@@ -6,6 +6,8 @@ using Microsoft.AspNetCore.Mvc;
 using System;
 
 namespace Consultorio.Controllers
+
+    //https://www.youtube.com/watch?v=GC_IY47qDYs&list=PLxd1RHU8YgYkHCbZqtqWuaYHASNERx-Tn&index=7
 {
     [ApiController]
     [Route("api/[controller]")]
