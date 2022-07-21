@@ -1,0 +1,6 @@
+{
+    "files.exclude": {
+      "Consultorio/bin": true,
+      "Consultorio/obj": true,
+    }
+  }
