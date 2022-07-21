@@ -52,7 +52,7 @@ namespace Consultorio.Controllers
             var agedamentoSelecionado = agendamentos.Find(agendamento => agendamento.Id == id);
 
             if (agedamentoSelecionado == null)
-                return NotFound($"Não foi possivel encontrar agendamento com id {id}");
+                return NotFound($"Não foi possivel encontrar agendamento com id {id}sss");
 
             return Ok(agedamentoSelecionado);
         }
