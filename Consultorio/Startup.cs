@@ -26,8 +26,12 @@ namespace Consultorio
             var connectionSqlite = Configuration["ConnectionStrings:SqliteConnectionString"];
 
             services.AddDbContext<ConsultorioContext>(options =>
-                options.UseSqlite(connectionSqlite, assembly => assembly.MigrationsAssembly(typeof(ConsultorioContext).Assembly.FullName))
+                options.UseSqlite(
+                    connectionSqlite,
+                    assembly => assembly.MigrationsAssembly(typeof(ConsultorioContext).Assembly.FullName)
+                )
             );
+
             // Add framework services.
             // services.AddMvc();
 
