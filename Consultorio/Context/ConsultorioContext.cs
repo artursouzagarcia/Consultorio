@@ -6,24 +6,19 @@ namespace Consultorio.Context
 {
     public class ConsultorioContext : DbContext
     {
-        public ConsultorioContext(DbContextOptions<ConsultorioContext> options) : base(options)
-        {
+        public ConsultorioContext(DbContextOptions<ConsultorioContext> options) : base(options) { }
 
-        }
+        public DbSet<Consulta> Consultas { get; set; }
+        // public DbSet<Especialidade> Especialidades { get; set; }
+        // public DbSet<Paciente> Pacientes { get; set; }
+        // public DbSet<Profissional> Profissionais { get; set; }
 
-        public DbSet<Agendamento> Agendamentos { get; set; }
+        // public DbSet<ProfissionalEspecialidade> ProfissionalEspecialidades {get; set;}
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
-
-            var agendamento = modelBuilder.Entity<Agendamento>();
-
-            agendamento.ToTable("tb_agendamento");
-            agendamento.HasKey(tb => tb.Id);
-            agendamento.Property(tb => tb.Id).HasColumnName("id").ValueGeneratedOnAdd();
-            agendamento.Property(tb => tb.NomePaciente).HasColumnName("nome_paciente").HasColumnType("varchar(100)").IsRequired();
-            agendamento.Property(tb => tb.Horario).HasColumnName("horario").IsRequired();
+            modelBuilder.ApplyConfigurationsFromAssembly(GetType().Assembly);
         }
     }
 }

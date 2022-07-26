@@ -23,10 +23,10 @@ namespace Consultorio
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            var connection = Configuration["ConnectionStrings:SqliteConnectionString"];
+            var connectionSqlite = Configuration["ConnectionStrings:SqliteConnectionString"];
 
             services.AddDbContext<ConsultorioContext>(options =>
-                options.UseSqlite(connection)
+                options.UseSqlite(connectionSqlite, assembly => assembly.MigrationsAssembly(typeof(ConsultorioContext).Assembly.FullName))
             );
             // Add framework services.
             // services.AddMvc();
