@@ -22,7 +22,7 @@ namespace Consultorio.Context
             agendamento.ToTable("tb_agendamento");
             agendamento.HasKey(tb => tb.Id);
             agendamento.Property(tb => tb.Id).HasColumnName("id").ValueGeneratedOnAdd();
-            agendamento.Property(tb => tb.NomePaciente).HasColumnName("nomePaciente").HasColumnType("varchar(100)").IsRequired();
+            agendamento.Property(tb => tb.NomePaciente).HasColumnName("nome_paciente").HasColumnType("varchar(100)").IsRequired();
             agendamento.Property(tb => tb.Horario).HasColumnName("horario").IsRequired();
         }
     }
