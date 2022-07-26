@@ -3,14 +3,16 @@ using System;
 using Consultorio.Context;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace Consultorio.Migrations
 {
     [DbContext(typeof(ConsultorioContext))]
-    partial class ConsultorioContextModelSnapshot : ModelSnapshot
+    [Migration("20220725195023_ChangeNameAgendamento2")]
+    partial class ChangeNameAgendamento2
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -20,17 +22,13 @@ namespace Consultorio.Migrations
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("INTEGER")
-                        .HasColumnName("id");
+                        .HasColumnType("INTEGER");
 
                     b.Property<DateTime>("Horario")
-                        .HasColumnType("TEXT")
-                        .HasColumnName("horario");
+                        .HasColumnType("TEXT");
 
                     b.Property<string>("NomePaciente")
-                        .IsRequired()
-                        .HasColumnType("varchar(100)")
-                        .HasColumnName("nomePaciente");
+                        .HasColumnType("TEXT");
 
                     b.HasKey("Id");
 
