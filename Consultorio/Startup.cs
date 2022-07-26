@@ -8,6 +8,8 @@ using Microsoft.OpenApi.Models;
 
 using Microsoft.EntityFrameworkCore;
 using Consultorio.Context;
+using Consultorio.Repository.Interfaces;
+using Consultorio.Repository;
 
 namespace Consultorio
 {
@@ -35,11 +37,19 @@ namespace Consultorio
             // Add framework services.
             // services.AddMvc();
 
-            services.AddControllers();
+            services.AddControllers().AddNewtonsoftJson(options =>
+            {
+                options.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore;
+            });
+
             services.AddSwaggerGen(c =>
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "Consultorio", Version = "v1" });
             });
+
+            //inhetando dependencias
+            services.AddScoped<IBaseRepository, BaseRepository>();
+            services.AddScoped<IPacienteRepository, PacienteRepository>();
             services.AddScoped<IEmailService, EmailService>();
         }
 
@@ -62,5 +72,6 @@ namespace Consultorio
                 endpoints.MapControllers();
             });
         }
+
     }
 }
