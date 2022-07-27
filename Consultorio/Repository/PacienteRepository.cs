@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Consultorio.Context;
+using Consultorio.Models.Dtos;
 using Consultorio.Models.Entities;
 using Consultorio.Repository.Interfaces;
 using Microsoft.EntityFrameworkCore;
@@ -18,16 +19,18 @@ namespace Consultorio.Repository
             this.context = context;
         }
 
-        public ICollection<Paciente> GetPacientes(bool fullData = false)
+        public async Task<ICollection<PacienteDto>> GetPacientesAsync()
         {
-            var pacientes = fullData ? this.context.Pacientes.Include(x => x.Consultas).ToList() : this.context.Pacientes.ToList();
 
-            return pacientes;
+            return await this.context.Pacientes.Select(x => new PacienteDto { Id = x.Id, Nome = x.Nome }).ToListAsync();
         }
 
-        public Paciente GetPacienteById(int id)
+        public async Task<Paciente> GetPacienteByIdAsync(int id)
         {
-            throw new NotImplementedException();
+            return await this.context.Pacientes
+                        .Include(x => x.Consultas)
+                        .Where(x => x.Id == id)
+                        .FirstOrDefaultAsync();
         }
     }
 }
